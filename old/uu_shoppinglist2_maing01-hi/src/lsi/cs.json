@@ -32,7 +32,6 @@
   "Menu": {
     "home": "Vítejte",
     "about": "O aplikaci",
-    "jokes": "Seznam",
-    "lists": "Menu seznamu"
+    "jokes": "Seznam"
   }
 }

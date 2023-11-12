@@ -3,17 +3,7 @@ import { createVisualComponent, PropTypes, Utils } from "uu5g05";
 import { Box, Text, Line, Button, DateTime } from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
-function arc(joke){
-  if (joke.averageRating<1){
-    return "ARCHIVED LIST";
-  } else if (joke.averageRating>=1) {
-    return "";
-  }
-}
-const navigateHome = () => {
-  // 👇️ navigate to /
-  navigate('/jokes');
-};
+
 const Tile = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Tile",
@@ -40,10 +30,9 @@ const Tile = createVisualComponent({
   defaultProps: {
     onUpdate: () => {},
     onDelete: () => {},
-    onDetail: () => {},
   },
   //@@viewOff:defaultProps
-  
+
   render(props) {
     //@@viewOn:private
     function handleDelete(event) {
@@ -52,10 +41,6 @@ const Tile = createVisualComponent({
 
     function handleUpdate(event) {
       props.onUpdate(new Utils.Event(props.joke, event));
-    }
-
-    function handleDetail(event) {
-      props.onDetail(new Utils.Event(props.joke, event))
     }
     //@@viewOff:private
 
@@ -88,12 +73,9 @@ const Tile = createVisualComponent({
         </div>
         
         <Box significance="distinct">
-          <Text category="interface" segment="content" type="medium" significance="subdued" colorScheme="building">
-            {arc(props.joke)}
-          </Text>
-          <Button icon="mdi-check" onClick={handleUpdate} significance="subdued" tooltip="Archive" />
+          
+          <Button icon="mdi-check" onClick={handleUpdate} significance="subdued" tooltip="Update" />
           <Button icon="mdi-delete" onClick={handleDelete} significance="subdued" tooltip="Delete" />
-          <a href="/jokes">Detail</a>
         </Box>
       </Box>
     );
