@@ -113,10 +113,28 @@ const ListProvider = createComponent({
       setJokeList((prevJokeList) => [...prevJokeList, joke2]);
       return joke2;
     }
+    function filterList(joke, values) {
+      setJokeList((prevJokeList) => prevJokeList.filter((item) => 0 !== joke.averageRating));
+      /*var avr = 0;
+      if (joke.averageRating==0) avr=5;
+      const joke2 = {
+        name: joke.name,
+        id: joke.id,
+        averageRating: avr,  // <0, 5>
+        text: joke.text,
+        uuIdentityName: joke.uuIdentityName,
+        sys: {
+          cts: new Date().toISOString(),
+        },
+      };
+      setJokeList((prevJokeList) => [...prevJokeList, joke2]);
+      return joke2;*/
+      return;
+    }
     //@@viewOff:private
-
+    //const [showArchived, setShowArchived]= useState(InitialJokeList);
     //@@viewOn:render
-    const value = { jokeList, remove, update, create };
+    const value = { jokeList, remove, update, create, filterList };
     
     return typeof props.children === "function" ? props.children(value) : props.children;
     

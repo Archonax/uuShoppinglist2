@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useState } from "uu5g05"; //useState for archive button
 import { useAlertBus } from "uu5g05-elements";
 import Tile from "./tile";
 import Config from "./config/config.js";
@@ -15,6 +15,7 @@ const ListView = createVisualComponent({
     jokeList: PropTypes.array.isRequired,
     onUpdate: PropTypes.func,
     onDelete: PropTypes.func,
+    onFilterList: PropTypes.func,
   },
   //@@viewOff:propTypes
 
@@ -62,6 +63,14 @@ const ListView = createVisualComponent({
         showError(error, "List archive failed!");
       }
     }
+    /*function handleFilter(event) {
+      try {
+        props.onFilterList(event.data);
+      } catch (error) {
+        ListView.logger.error("Error filtering list", error);
+        showError(error, "List filter failed!");
+      }
+    }*/
     /*function handleDetail(event){
         try {
 
@@ -70,13 +79,27 @@ const ListView = createVisualComponent({
         }
     }*/
     //@@viewOff:private
+    
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props);
-
+    let a = 1;
+    const arcfunc=()=>{
+      a++;
+      if (a%3){
+        a++;
+      }
+    }
+    
+    //let showArchived=false;
+    const [showArchived, setShowArchived]= useState();
+    const jokeFList = props.jokeList.filter((joke => joke.averageRating !==0))
+    if(showArchived==true){
     return (
-      
       <div {...attrs}>
+        <button onClick={()=>setShowArchived(true)}>Show Archived</button>
+        <button onClick={()=>setShowArchived(false)}>Hide Archived</button>
+        
         {props.jokeList.map((joke) => (
           
           <Tile
@@ -89,6 +112,25 @@ const ListView = createVisualComponent({
         ))}
       </div>
     );
+    }else{
+      return (
+        <div {...attrs}>
+          <button onClick={()=>setShowArchived(true)}>Show Archived</button>
+          <button onClick={()=>setShowArchived(false)}>Hide Archived</button>
+          
+          {jokeFList.map((joke) => (
+            
+            <Tile
+              key={joke.id}
+              joke={joke}
+              onDelete={handleDelete}
+              onUpdate={handleUpdate}
+              style={{ width: 640, margin: "24px auto" }}
+            />
+          ))}
+        </div>
+      );
+    }
     //@@viewOff:render
   },
 });

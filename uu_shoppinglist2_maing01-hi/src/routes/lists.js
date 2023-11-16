@@ -9,7 +9,7 @@ import CreateView from "../bricks/joke/create-view2.js";
 //@@viewOff:imports
 
 
-function ArcComponent() {
+/*function ArcComponent() {
   let arc=1;
   const arcfunc=()=>{
     arc+=1;
@@ -19,23 +19,20 @@ function ArcComponent() {
     <button onClick={arcfunc}>Archive</button>
   </div>
   );
-}
+}*/
 
 let Lists = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Lists",
   //@@viewOff:statics
   
-  render() {
+  render(a) {
     //@@viewOn:render
     return (
       <>
         <RouteBar />
-        <ArcComponent></ArcComponent>
-        
-        
         <ListProvider>
-          {({ jokeList, remove, update, create }) => (
+          {({ jokeList, remove, update, create, filterList }) => (
             <>
               <CreateView onCreate={create} style={{ maxWidth: 400, margin: "24px auto", display: "block" }} />
               <ListView jokeList={jokeList} onDelete={remove} onUpdate={update} />
