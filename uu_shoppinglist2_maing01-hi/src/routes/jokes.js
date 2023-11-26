@@ -1,15 +1,18 @@
 //@@viewOn:imports
 import { createVisualComponent } from "uu5g05";
-import { withRoute } from "uu_plus4u5g02-app";
+import { RouteController } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar";
-import ListProvider from "../bricks/joke/list-provider";
+import ListProvider from "../bricks/joke/list-provider3";
+import ListTitle from "../bricks/joke/list-title";
 import ListView from "../bricks/joke/list-view";
 import CreateView from "../bricks/joke/create-view";
+import { withRoute } from "uu_plus4u5g02-app";
 //@@viewOff:imports
 
 
-function NameComponent() {
+
+/*function NameComponent() {
   const replaceHeaderText = () => {
       const newText = document.getElementById("inputField").value;
       document.getElementById("headerText").textContent = newText;
@@ -60,30 +63,33 @@ return (
         <button onClick={leaveList}>Leave</button>
     </div>
 );
-}
+}*/
+//@@viewOn:css
+const Css = {
+  container: () => Config.Css.css({ maxWidth: 640, margin: "0px auto" }),
+  createView: () => Config.Css.css({ margin: "24px 0px" }),
+};
+//@@viewOff:css
 
 let Jokes = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Jokes",
   //@@viewOff:statics
-  
+
   render() {
     //@@viewOn:render
     return (
       <>
         <RouteBar />
-        
-        
-        <NameComponent></NameComponent>
-        <UsersComponent></UsersComponent>
-        
-        
         <ListProvider>
-          {({ jokeList, remove, update, create }) => (
-            <>
-              <CreateView onCreate={create} style={{ maxWidth: 400, margin: "24px auto", display: "block" }} />
-              <ListView jokeList={jokeList} onDelete={remove} onUpdate={update} />
-            </>
+          {(jokeDataList) => (
+            <RouteController routeDataObject={jokeDataList}>
+              <div className={Css.container()}>
+                <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
+                <ListView jokeDataList={jokeDataList} />
+                <ListTitle jokeList={jokeDataList.data} />
+              </div>
+            </RouteController>
           )}
         </ListProvider>
       </>
@@ -91,9 +97,7 @@ let Jokes = createVisualComponent({
     //@@viewOff:render
   },
 });
-
 Jokes = withRoute(Jokes, { authenticated: true });
-
 //@@viewOn:exports
 export { Jokes };
 export default Jokes;
