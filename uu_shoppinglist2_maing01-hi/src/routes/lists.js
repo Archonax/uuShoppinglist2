@@ -1,11 +1,12 @@
 //@@viewOn:imports
 import { createVisualComponent } from "uu5g05";
-import { withRoute } from "uu_plus4u5g02-app";
+import { RouteController } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
-import RouteBar from "../core/route-bar.js";
-import ListProvider from "../bricks/joke/list-provider2.js";
-import ListView from "../bricks/joke/list-view2.js";
-import CreateView from "../bricks/joke/create-view2.js";
+import RouteBar from "../core/route-bar";
+import ListProvider from "../bricks/joke/list-provider4";
+import ListTitle from "../bricks/joke/list-title";
+import ListView from "../bricks/joke/list-view3";
+import CreateView from "../bricks/joke/create-view2";
 //@@viewOff:imports
 
 
@@ -21,22 +22,32 @@ import CreateView from "../bricks/joke/create-view2.js";
   );
 }*/
 
+//@@viewOn:css
+const Css = {
+  container: () => Config.Css.css({ maxWidth: 640, margin: "0px auto" }),
+  createView: () => Config.Css.css({ margin: "24px 0px" }),
+};
+//@@viewOff:css
+
 let Lists = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Lists",
   //@@viewOff:statics
-  
-  render(a) {
+
+  render() {
     //@@viewOn:render
     return (
       <>
         <RouteBar />
         <ListProvider>
-          {({ jokeList, remove, update, create, filterList }) => (
-            <>
-              <CreateView onCreate={create} style={{ maxWidth: 400, margin: "24px auto", display: "block" }} />
-              <ListView jokeList={jokeList} onDelete={remove} onUpdate={update} />
-            </>
+          {(jokeDataList) => (
+            <RouteController routeDataObject={jokeDataList}>
+              <div className={Css.container()}>
+                <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
+                <ListView jokeDataList={jokeDataList} />
+                <ListTitle jokeList={jokeDataList.data} />
+              </div>
+            </RouteController>
           )}
         </ListProvider>
       </>
@@ -44,9 +55,7 @@ let Lists = createVisualComponent({
     //@@viewOff:render
   },
 });
-
-Lists = withRoute(Lists, { authenticated: true });
-
+//Jokes = withRoute(Jokes, { authenticated: true });
 //@@viewOn:exports
 export { Lists };
 export default Lists;

@@ -42,7 +42,7 @@ const Spa = createVisualComponent({
   render() {
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+      <Plus4U5.SpaProvider skipAppWorkspaceProvider initialLanguageList={["en", "cs"]}>
         <Plus4U5App.Spa routeMap={ROUTE_MAP} />
       </Plus4U5.SpaProvider>
     );

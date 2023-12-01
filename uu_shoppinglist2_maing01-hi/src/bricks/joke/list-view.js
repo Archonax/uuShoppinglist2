@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, PropTypes, Utils, useRef } from "uu5g05";
 import { Button, Pending, useAlertBus } from "uu5g05-elements";
-import Tile from "./tile";
+import Tile from "./tile2";
 import Config from "./config/config.js";
 //@@viewOff:imports
 

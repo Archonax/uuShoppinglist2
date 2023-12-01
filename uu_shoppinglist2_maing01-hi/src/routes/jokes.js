@@ -7,7 +7,7 @@ import ListProvider from "../bricks/joke/list-provider3";
 import ListTitle from "../bricks/joke/list-title";
 import ListView from "../bricks/joke/list-view";
 import CreateView from "../bricks/joke/create-view";
-import { withRoute } from "uu_plus4u5g02-app";
+//import { withRoute } from "uu_plus4u5g02-app";
 //@@viewOff:imports
 
 
@@ -81,6 +81,7 @@ let Jokes = createVisualComponent({
     return (
       <>
         <RouteBar />
+        <h1>Space for user mgmt component when uuIdentity implemented</h1>
         <ListProvider>
           {(jokeDataList) => (
             <RouteController routeDataObject={jokeDataList}>
@@ -97,7 +98,7 @@ let Jokes = createVisualComponent({
     //@@viewOff:render
   },
 });
-Jokes = withRoute(Jokes, { authenticated: true });
+//Jokes = withRoute(Jokes, { authenticated: true });
 //@@viewOn:exports
 export { Jokes };
 export default Jokes;

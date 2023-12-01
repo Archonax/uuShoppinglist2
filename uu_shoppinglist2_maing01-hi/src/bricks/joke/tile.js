@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils } from "uu5g05";
-import { Box, Text, Line, Button, DateTime } from "uu5g05-elements";
+import { createVisualComponent, PropTypes, Utils, useEffect } from "uu5g05";
+import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
+
 function arc(joke){
   if (joke.averageRating<1){
     return "ARCHIVED LIST";
@@ -14,6 +15,77 @@ const navigateHome = () => {
   // 👇️ navigate to /
   navigate('/jokes');
 };
+//@@viewOn:css
+const Css = {
+  main: () =>
+    Config.Css.css({
+      display: "flex",
+      flexDirection: "column",
+      height: "100%",
+    }),
+
+  header: () =>
+    Config.Css.css({
+      display: "block",
+      padding: 16,
+      height: 48,
+    }),
+
+  content: (image) =>
+    Config.Css.css({
+      display: "flex",
+      alignItems: image ? "center" : "left",
+      justifyContent: image ? "center" : "flex-start",
+      height: "calc(100% - 48px - 48px)",
+      overflow: "hidden",
+    }),
+
+  text: () =>
+    Config.Css.css({
+      display: "block",
+      marginLeft: 16,
+      marginRight: 16,
+      marginBottom: 16,
+    }),
+
+  image: () => Config.Css.css({ width: "100%" }),
+
+  footer: () =>
+    Config.Css.css({
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      height: 48,
+      marginTop: 8,
+      paddingLeft: 16,
+      paddingRight: 8,
+    }),
+
+  infoLine: () =>
+    Config.Css.css({
+      display: "block",
+      marginLeft: 16,
+      marginTop: 8,
+    }),
+};
+//@@viewOff:css
+//@@viewOn:helpers
+function InfoLine({ children }) {
+  return (
+    <Text
+      category="interface"
+      segment="content"
+      type="medium"
+      significance="subdued"
+      colorScheme="building"
+      className={Css.infoLine()}
+    >
+      {children}
+    </Text>
+  );
+}
+//@@viewOff:helpers
+
 const Tile = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "Tile",
@@ -21,16 +93,7 @@ const Tile = createVisualComponent({
 
   //@@viewOn:propTypes
   propTypes: {
-    joke: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      text: PropTypes.string,
-      imageUrl: PropTypes.string,
-      averageRating: PropTypes.number,
-      uuIdentityName: PropTypes.string.isRequired,
-      sys: PropTypes.shape({
-        cts: PropTypes.string,
-      }),
-    }).isRequired,
+    jokeDataObject: PropTypes.object.isRequired,
     onUpdate: PropTypes.func,
     onDelete: PropTypes.func,
   },
@@ -40,60 +103,80 @@ const Tile = createVisualComponent({
   defaultProps: {
     onUpdate: () => {},
     onDelete: () => {},
-    onDetail: () => {},
   },
   //@@viewOff:defaultProps
-  
+
   render(props) {
     //@@viewOn:private
-    function handleDelete(event) {
-      props.onDelete(new Utils.Event(props.joke, event));
+    useEffect(() => {
+      if (
+        props.jokeDataObject.data.image &&
+        !props.jokeDataObject.data.imageUrl &&
+        props.jokeDataObject.state === "ready" &&
+        props.jokeDataObject.handlerMap?.getImage
+      ) {
+        props.jokeDataObject.handlerMap
+          .getImage(props.jokeDataObject.data)
+          .catch((error) => Tile.logger.error("Error loading image", error));
+      }
+    }, [props.jokeDataObject]);
+
+    function handleDelete() {
+      props.onDelete(props.jokeDataObject);
     }
 
-    function handleUpdate(event) {
-      props.onUpdate(new Utils.Event(props.joke, event));
-    }
-
-    function handleDetail(event) {
-      props.onDetail(new Utils.Event(props.joke, event))
+    function handleUpdate() {
+      props.onUpdate(props.jokeDataObject);
     }
     //@@viewOff:private
 
     //@@viewOn:render
-    const { elementProps } = Utils.VisualComponent.splitProps(props);
+    const { elementProps } = Utils.VisualComponent.splitProps(props, Css.main());
+    const joke = props.jokeDataObject.data;
+    const isActionDisabled = props.jokeDataObject.state === "pending";
 
     return (
       <Box {...elementProps}>
-        <Text category="interface" segment="title" type="minor" colorScheme="building">
-          {props.joke.name}
+        <Text category="interface" segment="title" type="minor" colorScheme="building" className={Css.header()}>
+          {joke.name}
         </Text>
-        <div>
-          <Text category="interface" segment="content" type="medium" colorScheme="building">
-            {props.joke.text}
-          </Text>
+
+        <div className={Css.content(joke.image)}>
+          {joke.text && !joke.image && (
+            <Text category="interface" segment="content" type="medium" colorScheme="building" className={Css.text()}>
+              {joke.text}
+            </Text>
+          )}
+          {joke.imageUrl && <img src={joke.imageUrl} alt={joke.name} className={Css.image()} />}
+          {joke.image && !joke.imageUrl && <Pending size="xl" />}
         </div>
-        <div>
-          <img src={props.joke.imageUrl} />
-        </div>
+
         <Line significance="subdued" />
-        <div>
-          <Text category="interface" segment="content" type="medium" significance="subdued" colorScheme="building">
-            {props.joke.uuIdentityName}
-          </Text>
-        </div>
-        <div>
-          <Text category="interface" segment="content" type="medium" significance="subdued" colorScheme="building">
-            <DateTime value={props.joke.sys.cts} />
-          </Text>
-        </div>
-        
-        <Box significance="distinct">
-          <Text category="interface" segment="content" type="medium" significance="subdued" colorScheme="building">
-            {arc(props.joke)}
-          </Text>
-          <Button icon="mdi-check" onClick={handleUpdate} significance="subdued" tooltip="Archive" />
-          <Button icon="mdi-delete" onClick={handleDelete} significance="subdued" tooltip="Delete" />
-          <a href="/jokes">Detail</a>
+
+        <InfoLine>{joke.uuIdentityName}</InfoLine>
+
+        <InfoLine>
+          <DateTime value={joke.sys.cts} dateFormat="short" timeFormat="none" />
+        </InfoLine>
+
+        <Box significance="distinct" className={Css.footer()}>
+          {arc(joke)}
+          <div>
+            <Button
+              icon="mdi-pencil"
+              onClick={handleUpdate}
+              significance="subdued"
+              tooltip="Update"
+              disabled={isActionDisabled}
+            />
+            <Button
+              icon="mdi-delete"
+              onClick={handleDelete}
+              significance="subdued"
+              tooltip="Delete"
+              disabled={isActionDisabled}
+            />
+          </div>
         </Box>
       </Box>
     );
