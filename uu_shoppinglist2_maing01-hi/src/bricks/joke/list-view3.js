@@ -44,13 +44,13 @@ const ListView = createVisualComponent({
       try {
         await jokeDataObject.handlerMap.delete();
       } catch (error) {
-        ListView.logger.error("Error deleting joke", error);
-        showError(error, "Joke delete failed!");
+        ListView.logger.error("Error deleting list", error);
+        showError(error, "List delete failed!");
         return;
       }
 
       addAlert({
-        message: `The joke ${jokeDataObject.data.name} has been deleted.`,
+        message: `The list ${jokeDataObject.data.name} has been deleted.`,
         priority: "success",
         durationMs: 2000,
       });
@@ -60,8 +60,8 @@ const ListView = createVisualComponent({
       try {
         await jokeDataObject.handlerMap.update();
       } catch (error) {
-        ListView.logger.error("Error updating joke", error);
-        showError(error, "Joke update failed!");
+        ListView.logger.error("Error updating list", error);
+        showError(error, "List update failed!");
       }
     }
 
