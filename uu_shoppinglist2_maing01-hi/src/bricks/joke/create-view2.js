@@ -22,7 +22,7 @@ const Mode = {
 function CreateButton(props) {
   return (
     <Button {...props} colorScheme="primary" significance="highlighted" className={Css.button()}>
-      Create joke
+      Create list
     </Button>
   );
 }
@@ -56,9 +56,9 @@ const CreateView = createVisualComponent({
       try {
         joke = await props.jokeDataList.handlerMap.create(event.data.value);
       } catch (error) {
-        CreateView.logger.error("Error while creating joke", error);
+        CreateView.logger.error("Error while creating list", error);
         addAlert({
-          header: "Joke creation failed!",
+          header: "List creation failed!",
           message: error.message,
           priority: "error",
         });
@@ -66,7 +66,7 @@ const CreateView = createVisualComponent({
       }
 
       addAlert({
-        message: `Joke ${joke.name} has been created.`,
+        message: `List ${joke.name} has been created.`,
         priority: "success",
         durationMs: 2000,
       });

@@ -1,9 +1,10 @@
 {
     "itemList": [
       {
-        "name": "test",
-        "text": "AAAAAAAAAAAAAAA",
+        "name": "List 1",
+        "text": "Sample shopping list.",
         "image": null,
+        "categoryList": ["5c9237a0323cc0000c303028", "5c9237c1323cc0000c30302e","5c9237a0323cc0000c303029"],
         "averageRating": 2.875,
         "ratingCount": 16,
         "visibility": true,
@@ -14,10 +15,10 @@
         "id": "5u80d1ba9e6aad000d2cdf96"
       },
       {
-        "name": "test 2",
-        "text": "test 2 text",
+        "name": "Sample shopping list 2",
+        "text": "Another sample list.",
         "image": null,
-        "categoryList": ["5c9237a0323cc0000c303028", "5c9237c1323cc0000c30302e"],
+        "categoryList": ["5c9237a0323cc0000c303028", "5c9237c1323cc0000c30302e","5c9237a0323cc0000c303029"],
         "averageRating": 2.875,
         "ratingCount": 16,
         "visibility": true,
@@ -28,10 +29,10 @@
         "id": "5d80d1ba9e6aad000d2cdf96"
       },
       {
-        "name": "test 3",
-        "text": "change values in mock data",
+        "name": "Sample archived list",
+        "text": "Hide archived will stop this list from showing.",
         "image": null,
-        "categoryList": ["5c9237a0323cc0000c303028"],
+        "categoryList": ["5c9237a0323cc0000c303029"],
         "averageRating": 0,
         "ratingCount": 16,
         "visibility": true,
@@ -42,8 +43,8 @@
         "id": "5d10c496cdf4a0000c041019"
       },
       {
-        "name": "test 4 show archived",
-        "text": "rating 0 - done/archived",
+        "name": "Archived list 2",
+        "text": "The 'rating' of 0 means archival.",
         "image": null,
         "categoryList": ["5c9237a0323cc0000c303028"],
         "averageRating": 0,

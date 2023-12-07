@@ -1,0 +1,47 @@
+{
+    "itemList": [
+      {
+        "name": "Carrot",
+        "text": "Sample list item.",
+        "image": null,
+        "averageRating": 2.875,
+        "ratingCount": 16,
+        "visibility": true,
+        "uuIdentity": "6565-1",
+        "uuIdentityName": "Martin Farkaš",
+        "awid": "4ef6a7b01b5942ecbfb925b249af987f",
+        "sys": { "cts": "2019-09-17T12:29:46.205Z", "mts": "2020-04-05T22:45:04.806Z", "rev": 43 },
+        "id": "5c9237a0323cc0000c303028"
+      },
+      {
+        "name": "Milk",
+        "text": "Sample list item 2.",
+        "image": null,
+        "averageRating": 2.875,
+        "ratingCount": 16,
+        "visibility": true,
+        "uuIdentity": "6-138-1",
+        "uuIdentityName": "Milan Martinek",
+        "awid": "4ef6a7b01b5942ecbfb925b249af987f",
+        "sys": { "cts": "2019-09-17T12:29:46.205Z", "mts": "2020-04-05T22:45:04.806Z", "rev": 43 },
+        "id": "5c9237c1323cc0000c30302e"
+      },
+      {
+        "name": "Egg",
+        "text": "Sample completed item.",
+        "image": null,
+        "categoryList": ["5c9237a0323cc0000c303028"],
+        "averageRating": 0,
+        "ratingCount": 16,
+        "visibility": true,
+        "uuIdentity": "1524-1",
+        "uuIdentityName": "Michal Gregor",
+        "awid": "4ef6a7b01b5942ecbfb925b249af987f",
+        "sys": { "cts": "2019-06-24T12:39:50.196Z", "mts": "2020-04-05T22:45:05.322Z", "rev": 25 },
+        "id": "5c9237a0323cc0000c303029"
+      }
+      
+    ],
+    "pageInfo": { "pageIndex": 0, "pageSize": 100, "total": 4 },
+    "uuAppErrorMap": {}
+  }

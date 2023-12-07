@@ -1,6 +1,6 @@
 {
-    "name": "MOCK CREATED LIST",
-    "text": "This is mockup of new list.",
+    "name": "MOCK CREATED ITEM",
+    "text": "This is mockup of new item.",
     "image": null,
     "categoryList": [],
     "averageRating": 5.0,
@@ -10,6 +10,6 @@
     "uuIdentityName": "Unknown",
     "awid": "4ef6a7b01b5942ecbfb925b249af987f",
     "sys": { "cts": "2019-09-17T12:29:46.205Z", "mts": "2020-04-05T22:45:04.806Z", "rev": 43 },
-    "id": "5d80d1ba9e6aad000d2cdf97",
+    "id": "5c9237a0323cc0000c30302c",
     "uuAppErrorMap": {}
   }

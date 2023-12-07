@@ -36,12 +36,19 @@ const Calls = {
       const commandUri = Calls.getCommandUri("joke/list");
       return Calls.call("get", commandUri, dtoIn);
     },
+    list2(dtoIn) {
+      const commandUri = Calls.getCommandUri("joke/list2");
+      return Calls.call("get", commandUri, dtoIn);
+    },
 
     create(dtoIn) {
       const commandUri = Calls.getCommandUri("joke/create");
       return Calls.call("post", commandUri, dtoIn);
     },
-
+    create2(dtoIn) {
+      const commandUri = Calls.getCommandUri("joke/create2");
+      return Calls.call("post", commandUri, dtoIn);
+    },
     update(dtoIn) {
       const commandUri = Calls.getCommandUri("joke/update");
       return Calls.call("post", commandUri, dtoIn);
@@ -51,7 +58,10 @@ const Calls = {
       const commandUri = Calls.getCommandUri("joke/delete");
       return Calls.call("post", commandUri, dtoIn);
     },
-
+    delete2(dtoIn) {
+      const commandUri = Calls.getCommandUri("joke/delete2");
+      return Calls.call("post", commandUri, dtoIn);
+    },
     getImage(dtoIn) {
       const commandUri = Calls.getCommandUri("uu-app-binarystore/getBinaryData");
       return Calls.call("get", commandUri, dtoIn);

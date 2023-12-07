@@ -123,7 +123,7 @@ return (
       <div className={Css.buttonArea()}>
           {props.jokeDataList.state !== "pending" && (
             <Button colorScheme="primary" onClick={handleLoadNext}>
-              Load next 3 jokes
+              Load next 3 lists
             </Button>
           )}
           {props.jokeDataList.state === "pending" && <Pending />}

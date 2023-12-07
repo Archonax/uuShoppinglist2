@@ -36,15 +36,15 @@ const ListProvider = createComponent({
     const imageUrlListRef = useRef([]);
 
     function handleLoad(dtoIn) {
-      return Calls.Joke.list(dtoIn);
+      return Calls.Joke.list2(dtoIn);
     }
 
     function handleLoadNext(dtoIn) {
-      return Calls.Joke.list(dtoIn);
+      return Calls.Joke.list2(dtoIn);
     }
 
     function handleCreate(values) {
-      return Calls.Joke.create(values);
+      return Calls.Joke.create2(values);
     }
 
     async function handleUpdate() {
