@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useState } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useState, useLsi } from "uu5g05";
 import { Button, useAlertBus } from "uu5g05-elements";
 import CreateForm from "./create-form2.js";
 import Config from "./config/config.js";
+import importLsi from "../../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:css
@@ -22,7 +23,7 @@ const Mode = {
 function CreateButton(props) {
   return (
     <Button {...props} colorScheme="primary" significance="highlighted" className={Css.button()}>
-      Create list
+      {props.children}
     </Button>
   );
 }
@@ -49,7 +50,7 @@ const CreateView = createVisualComponent({
     //@@viewOn:private
     const [mode, setMode] = useState(Mode.BUTTON);
     const { addAlert } = useAlertBus();
-
+    const lsi = useLsi(importLsi,["UuShoppingList2.Bricks.Joke.CreateView"]);
     async function handleSubmit(event) {
       let joke;
 
@@ -58,7 +59,7 @@ const CreateView = createVisualComponent({
       } catch (error) {
         CreateView.logger.error("Error while creating list", error);
         addAlert({
-          header: "List creation failed!",
+          header: lsi.createFail,
           message: error.message,
           priority: "error",
         });
@@ -66,7 +67,7 @@ const CreateView = createVisualComponent({
       }
 
       addAlert({
-        message: `List ${joke.name} has been created.`,
+        message: Utils.String.format(lsi.createDone,joke.name),
         priority: "success",
         durationMs: 2000,
       });
@@ -82,7 +83,7 @@ const CreateView = createVisualComponent({
 
     switch (mode) {
       case Mode.BUTTON:
-        content = <CreateButton onClick={() => setMode(Mode.FORM)} />;
+        content = <CreateButton onClick={() => setMode(Mode.FORM)}>{lsi.createJoke}</CreateButton>;
         break;
       default:
         content = <CreateForm onSubmit={handleSubmit} onCancel={() => setMode(Mode.BUTTON)} />;

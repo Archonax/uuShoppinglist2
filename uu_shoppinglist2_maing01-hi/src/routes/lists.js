@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent } from "uu5g05";
+import { createVisualComponent, useScreenSize } from "uu5g05";
 import { RouteController } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar";
@@ -22,9 +22,26 @@ import CreateView from "../bricks/joke/create-view2";
   );
 }*/
 
-//@@viewOn:css
 const Css = {
-  container: () => Config.Css.css({ maxWidth: 640, margin: "0px auto" }),
+  container: (screenSize) => {
+    let maxWidth;
+
+    switch (screenSize) {
+      case "xs":
+      case "s":
+        maxWidth = "100%";
+        break;
+      case "m":
+      case "l":
+        maxWidth = 640;
+        break;
+      case "xl":
+      default:
+        maxWidth = 1280;
+    }
+
+    return Config.Css.css({ maxWidth: maxWidth, margin: "0px auto", paddingLeft: 8, paddingRight: 8 });
+  },
   createView: () => Config.Css.css({ margin: "24px 0px" }),
 };
 //@@viewOff:css
@@ -35,6 +52,7 @@ let Lists = createVisualComponent({
   //@@viewOff:statics
 
   render() {
+    const [screenSize] = useScreenSize();
     //@@viewOn:render
     return (
       <>
@@ -42,7 +60,7 @@ let Lists = createVisualComponent({
         <ListProvider>
           {(jokeDataList) => (
             <RouteController routeDataObject={jokeDataList}>
-              <div className={Css.container()}>
+              <div className={Css.container(screenSize)}>
                 <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
                 <ListView jokeDataList={jokeDataList} />
                 <ListTitle jokeList={jokeDataList.data} />

@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useRef, useState } from "uu5g05";
-import { Button, Pending, useAlertBus } from "uu5g05-elements";
+import { createVisualComponent, PropTypes, Utils, useRef, useState,useLsi } from "uu5g05";
+import importLsi from "../../lsi/import-lsi.js";
+import { Button, Pending, useAlertBus, Grid } from "uu5g05-elements";
 import Tile from "./tile";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -31,7 +32,8 @@ const ListView = createVisualComponent({
     //@@viewOn:private
     const { addAlert } = useAlertBus();
     const nextPageIndexRef = useRef(1);
-
+    const lsi = useLsi(importLsi,["UuShoppingList2.Bricks.Joke.ListView"]);
+    const lsi2 = useLsi(importLsi,["AAA"]);
     function showError(error, header = "") {
       addAlert({
         header,
@@ -45,12 +47,12 @@ const ListView = createVisualComponent({
         await jokeDataObject.handlerMap.delete();
       } catch (error) {
         ListView.logger.error("Error deleting list", error);
-        showError(error, "List delete failed!");
+        showError(error, lsi.deleteFail);
         return;
       }
 
       addAlert({
-        message: `The list ${jokeDataObject.data.name} has been deleted.`,
+        message: Utils.String.format(lsi.deleteDone,jokeDataObject.data.name),
         priority: "success",
         durationMs: 2000,
       });
@@ -61,7 +63,7 @@ const ListView = createVisualComponent({
         await jokeDataObject.handlerMap.update();
       } catch (error) {
         ListView.logger.error("Error updating list", error);
-        showError(error, "List update failed!");
+        showError(error, lsi.updateFail);
       }
     }
 
@@ -71,7 +73,7 @@ const ListView = createVisualComponent({
         nextPageIndexRef.current++;
       } catch (error) {
         ListView.logger.error("Error loading next page", error);
-        showError(error, "Page loading failed!");
+        showError(error, lsi.pageLoadFail);
       }
     }
     //@@viewOff:private
@@ -84,17 +86,36 @@ const arcfunc=()=>{
     a++;
   }
 }
-const jokeList = props.jokeDataList.data.filter((item) => item !== undefined);
+//const jokeList = props.jokeDataList.data.filter((item) => item !== undefined);
+const jokeList3 = props.jokeDataList.data.filter((item) => item !== undefined);// + props.jokeDataList.newData.filter((item)=>item!==undefined);
+    const jokeList2 = props.jokeDataList.newData.filter((item) => item !== undefined);
+    const jokeList = jokeList3.concat(jokeList2);
+
 //let showArchived=false;
 const [showArchived, setShowArchived]= useState();
-const jokeFList = props.jokeDataList.data.filter((item) => (item!==undefined)&&(item.data.averageRating !==0));
+
+const jokeFList3 = props.jokeDataList.data.filter((item) => (item !== undefined)&&(item.data.averageRating !==0));// + props.jokeDataList.newData.filter((item)=>item!==undefined);
+    const jokeFList2 = props.jokeDataList.newData.filter((item) => (item !== undefined)&&(item.data.averageRating !==0));
+    const jokeFList = jokeFList3.concat(jokeFList2);
+
+//const jokeFList = props.jokeDataList.data.filter((item) => (item!==undefined)&&(item.data.averageRating !==0));
 if(showArchived==true){
 return (
   <div {...attrs}>
-    <button onClick={()=>setShowArchived(true)}>Show Archived</button>
-    <button onClick={()=>setShowArchived(false)}>Hide Archived</button>
+    <button onClick={()=>setShowArchived(true)}>{lsi2.show}</button>
+    <button onClick={()=>setShowArchived(false)}>{lsi2.hide}</button>
     
     {jokeList.map((item) => (
+          <Grid
+          data={props.jokeDataList.data}
+          onLoad={handleLoadNext}
+          verticalGap={8}
+          horizontalGap={8}
+          tileHeight={300}
+          tileMinWidth={400}
+          tileMaxWidth={800}
+          emptyState={lsi.noJokes}
+        >
           <Tile
             key={item.data.id}
             jokeDataObject={item}
@@ -102,16 +123,28 @@ return (
             onUpdate={handleUpdate}
             className={Css.tile()}
           />
+        </Grid>
+          
         ))}
   </div>
 );
 }else{
   return (
     <div {...attrs}>
-      <button onClick={()=>setShowArchived(true)}>Show Archived</button>
-      <button onClick={()=>setShowArchived(false)}>Hide Archived</button>
+      <button onClick={()=>setShowArchived(true)}>{lsi2.show}</button>
+      <button onClick={()=>setShowArchived(false)}>{lsi2.hide}</button>
       
       {jokeFList.map((item) => (
+          <Grid
+          data={props.jokeDataList.data}
+          onLoad={handleLoadNext}
+          verticalGap={8}
+          horizontalGap={8}
+          tileHeight={300}
+          tileMinWidth={400}
+          tileMaxWidth={800}
+          emptyState={lsi.noJokes}
+        >
           <Tile
             key={item.data.id}
             jokeDataObject={item}
@@ -119,11 +152,13 @@ return (
             onUpdate={handleUpdate}
             className={Css.tile()}
           />
+        </Grid>
+          
         ))}
       <div className={Css.buttonArea()}>
           {props.jokeDataList.state !== "pending" && (
             <Button colorScheme="primary" onClick={handleLoadNext}>
-              Load next 3 lists
+              {lsi.loadNext}
             </Button>
           )}
           {props.jokeDataList.state === "pending" && <Pending />}

@@ -1,5 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, PropTypes, Utils, useEffect } from "uu5g05";
+import { createVisualComponent, PropTypes, Utils, useEffect, useLsi } from "uu5g05";
+import importLsi from "../../lsi/import-lsi.js";
 import { Box, Text, Line, Button, DateTime, Pending } from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -107,6 +108,7 @@ const Tile = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
+    const lsi = useLsi(importLsi,["UuShoppingList2.Bricks.Joke.Tile"]);
     //@@viewOn:private
     useEffect(() => {
       if (
@@ -166,14 +168,14 @@ const Tile = createVisualComponent({
               icon="mdi-pencil"
               onClick={handleUpdate}
               significance="subdued"
-              tooltip="Update"
+              tooltip={lsi.updateTip}
               disabled={isActionDisabled}
             />
             <Button
               icon="mdi-delete"
               onClick={handleDelete}
               significance="subdued"
-              tooltip="Delete"
+              tooltip={lsi.deleteTip}
               disabled={isActionDisabled}
             />
           </div>

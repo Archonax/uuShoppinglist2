@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent } from "uu5g05";
+import { createVisualComponent, useScreenSize, useLsi } from "uu5g05";
 import { RouteController } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import RouteBar from "../core/route-bar";
@@ -7,6 +7,7 @@ import ListProvider from "../bricks/joke/list-provider3";
 import ListTitle from "../bricks/joke/list-title";
 import ListView from "../bricks/joke/list-view";
 import CreateView from "../bricks/joke/create-view";
+import importLsi from "../lsi/import-lsi.js";
 //import { withRoute } from "uu_plus4u5g02-app";
 //@@viewOff:imports
 
@@ -65,10 +66,30 @@ return (
 );
 }*/
 //@@viewOn:css
+//@@viewOn:css
 const Css = {
-  container: () => Config.Css.css({ maxWidth: 640, margin: "0px auto" }),
+  container: (screenSize) => {
+    let maxWidth;
+
+    switch (screenSize) {
+      case "xs":
+      case "s":
+        maxWidth = "100%";
+        break;
+      case "m":
+      case "l":
+        maxWidth = 640;
+        break;
+      case "xl":
+      default:
+        maxWidth = 1280;
+    }
+    
+    return Config.Css.css({ maxWidth: maxWidth, margin: "0px auto", paddingLeft: 8, paddingRight: 8 });
+  },
   createView: () => Config.Css.css({ margin: "24px 0px" }),
 };
+//@@viewOff:css
 //@@viewOff:css
 
 let Jokes = createVisualComponent({
@@ -77,15 +98,17 @@ let Jokes = createVisualComponent({
   //@@viewOff:statics
 
   render() {
+    const lsi = useLsi(importLsi,["AAA"]);
+    const [screenSize] = useScreenSize();
     //@@viewOn:render
     return (
       <>
         <RouteBar />
-        <h1>Space for user mgmt component when uuIdentity implemented</h1>
+        <h1>{lsi.placeholder}</h1>
         <ListProvider>
           {(jokeDataList) => (
             <RouteController routeDataObject={jokeDataList}>
-              <div className={Css.container()}>
+              <div className={Css.container(screenSize)}>
                 <CreateView jokeDataList={jokeDataList} className={Css.createView()} />
                 <ListView jokeDataList={jokeDataList} />
                 <ListTitle jokeList={jokeDataList.data} />

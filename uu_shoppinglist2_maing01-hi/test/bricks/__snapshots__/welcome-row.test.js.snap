@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeRow className="test-classname" 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49 test-classname"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow default props 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow disabled=false 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  disabled={false}
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow disabled=true 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  disabled={true}
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow elementAttrs={"data":{"test":"data-test-value"}} 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  data={
+    {
+      "test": "data-test-value",
+    }
+  }
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow fullTextSearchPriority=0 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49 uu-fulltextsearch-0"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow hidden=false 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  hidden={false}
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow hidden=true 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  hidden={true}
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow id="test-id" 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="test-id"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow left="Left content" 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  >
+    Left content
+  </div>
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow left={"type":"span","key":"l","ref":null,"props":{"children":"Left"},"_owner":null,"_store":{}} 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  >
+    <span
+      key="l"
+    >
+      Left
+    </span>
+  </div>
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow nestingLevel="box" 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow nestingLevel="inline" 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow noPrint=false 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow noPrint=true 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49 uu-1ak6bum"
+  id="uuID"
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;
+
+exports[`WelcomeRow style={"margin":8} 1`] = `
+<div
+  className="uushoppinglist-bricks-1dimv49"
+  id="uuID"
+  style={
+    {
+      "margin": 8,
+    }
+  }
+>
+  <div
+    className="uushoppinglist-bricks-16d8ppv"
+  />
+  <div
+    className="uushoppinglist-bricks-1fjtzvx"
+  >
+    Children content
+  </div>
+</div>
+`;

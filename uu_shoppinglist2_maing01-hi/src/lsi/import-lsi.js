@@ -1,9 +1,10 @@
 import { Utils } from "uu5g05";
 import lsiEn from "./en.json";
+import lsiCs from "./cs.json";
 
-const libraryCode = process.env.NAME;
+const libraryCode = "uu-shoppinglist2-maing01-hi";
 
-const importLsi = (lang) => import(`./${lang}.json`);
+const importLsi = (language) => import(`./${language}.json`);
 importLsi.libraryCode = libraryCode;
 
 Utils.Lsi.setDefaultLsi(libraryCode, { en: lsiEn });

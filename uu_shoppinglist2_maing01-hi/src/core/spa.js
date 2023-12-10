@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, Environment } from "uu5g05";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
 
@@ -42,7 +42,7 @@ const Spa = createVisualComponent({
   render() {
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider skipAppWorkspaceProvider initialLanguageList={["en", "cs"]}>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs", "uk"]} baseUri={Environment.get("callsBaseUri")}>
         <Plus4U5App.Spa routeMap={ROUTE_MAP} />
       </Plus4U5.SpaProvider>
     );
